@@ -3,12 +3,11 @@ import DeckCreator from './DeckCreator'
 
 function LearnIndex(props){
     return(
-        <div className="col-md-11 info-box">
+        <div className="col-sm-12 info-box">
             <h1>Select a deck to study or create a new one to get started!</h1>
             <button onClick={props.onClick}>Create New Deck</button>
             <style jsx>{`
                 .info-box {
-                    background-color: #eee;
                     padding: 30px;
                     text-align: center;
                   }
@@ -19,15 +18,16 @@ function LearnIndex(props){
 
 function DeckWizard(props){
     return(
-        <div className="col-md-11">
+        <div className="col-sm-12 deck-wizard">
             <h1>Great! Let's start by adding words.</h1>
             <DeckCreator />
-            <button id="cancel" onClick={props.onClick}>Cancel</button>
+            <button id="cancel" onClick={props.onClick} className="btn btn-danger">Return to Dashboard</button>
             <style jsx>{`
+                .deck-wizard {
+                    text-align: center;
+                }
                 #cancel{
-                    margin-top: 20px;
-                    background-color: red;
-                    border-color: red;
+                    margin: 20px;
                 }
             `}</style>
         </div>

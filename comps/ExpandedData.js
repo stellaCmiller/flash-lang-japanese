@@ -8,23 +8,30 @@ export default class ExpandedData extends React.Component {
             <li style={{ float: 'left', padding: '10px', margin: "none" }}>{e.gloss}</li>
         )
         return (
-            <div className="container">
-                <p>All Definitions for this Reading:</p>
-                <div className="expanded-view row">
-                    <div className="col-sm-6">
-                        <ul>{readings}</ul>
-                    </div>
+            <div className="expanded-data row">
+                <div className="col-6">
+                    <p style={{padding: '10px'}}>All Definitions for this Reading:</p>
+                </div>
+                <div className="expanded-view col-6">
+                    <ul>{readings}</ul>
                 </div>
                 <style jsx>{`
-                        .container p {
-                            font-weight: bold;
-                        }
-                        .expanded-view ul {
-                            margin-top: 2px;
-                            list-style: none;
-                        }
-                        `}
-                </style>
+                    p {
+                        font-weight: bold;
+                        margin-top: 0px;
+                    }
+
+                    .expanded-data {
+                        margin: 0;
+                        background-color: #eee;
+                        text-align: start;
+                    }
+
+                    .expanded-view ul {
+                        margin-top: 0px;
+                        list-style: none;
+                    }
+                `}</style>
             </div>
         )
     }

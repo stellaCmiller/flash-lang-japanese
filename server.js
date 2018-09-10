@@ -14,6 +14,7 @@ app.prepare()
 
   server.use(router)
   server.use(bodyParser.json());
+  server.use(express.static('public'))
 
   server.get('/signup', (req, res) => {
     const queryParams = { id: req.params.id } 
