@@ -6,6 +6,7 @@ export default class FlashCard {
     }
 
     display(){
-        console.log("please dont");
+        console.log("Kill me, I want this to be over");
+        console.log(this.english + "" + this.reading + "" + this.kanji);
     }
 }

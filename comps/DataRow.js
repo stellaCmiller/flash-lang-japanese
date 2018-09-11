@@ -1,7 +1,6 @@
 import { CSSTransition } from 'react-transition-group';
 import ExpandedData from './ExpandedData';
 import fetch from 'isomorphic-unfetch';
-import FlashCard from '../models/FlashCard';
 
 function InfoButton(props) {
     return (
@@ -31,7 +30,7 @@ export default class DataRow extends React.Component {
 
     addCard(){
         this.setState({cardAdded: true});
-        this.props.onClick(this.props.defid);
+        this.props.onClick(this.props.gloss, this.props.reb, this.props.keb);
     }
 
     collapse() {

@@ -2,6 +2,7 @@ const express = require('express')
 const next = require('next')
 const router = require('./controllers/api-routing.js')
 const bodyParser = require('body-parser');
+const mongoRouter = require('./controllers/mongo-routes');
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -12,9 +13,10 @@ app.prepare()
 .then(() => {
   const server = express()
 
-  server.use(router)
   server.use(bodyParser.json());
-  server.use(express.static('public'))
+  server.use(router);
+  server.use(mongoRouter);
+  server.use(express.static('public'));
 
   server.get('/signup', (req, res) => {
     const queryParams = { id: req.params.id } 

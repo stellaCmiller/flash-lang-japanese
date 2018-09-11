@@ -8,7 +8,6 @@ function CardDataContainer(props) {
             <style jsx>{`
                 #card-data{
                     width: 100%;
-                    margin-top: 20px;
                     padding: 0px;
                 }
             `}</style>
@@ -53,7 +52,7 @@ export default class DeckCreator extends React.Component {
                     that.setState({empty: true});
                 }
                 that.setState({ data: data });
-                that.setState({loading: false});
+                that.setState({ loading: false });
                 that.setState({ transition: true });
             })
         }).catch(err => console.log(err));
@@ -68,7 +67,6 @@ export default class DeckCreator extends React.Component {
                     </label>
                     <input type="text" value={this.state.value} onChange={this.handleChange} />
                     <input type="submit" value="Enter" />
-                    <button>Save Deck</button>
                 </form>
                 <CardDataContainer>
                     <CardData empty={this.state.empty} loading={this.state.loading} data={this.state.data} transition={this.state.transition} />

@@ -1,4 +1,5 @@
 import DataRow from './DataRow';
+import fetch from 'isomorphic-unfetch';
 
 function NoData(){
     return (
@@ -11,7 +12,8 @@ function NoData(){
 function CardsInDeck(props){
     return(
         <div>
-            <p>Number of cards added to deck: <span>{props.deck}</span></p>
+            <p style={{display: 'inline'}}>Number of cards added to deck: <span>{props.deck}</span></p>
+            <button style={{display: 'inline', margin: '5px'}} onClick={props.onClick}>Save Deck</button>
         </div>
     )
 }
@@ -20,14 +22,34 @@ export default class CardData extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            deck: []
+            deck: [],
+            saved: false
         }
         this.addCardToDeck = this.addCardToDeck.bind(this);
+        this.saveDeck = this.saveDeck.bind(this);
     }
 
-    addCardToDeck(defid){
+    //Sends the whole client side deck to MongoDB
+    saveDeck(){
+        const that = this;
+        fetch(`//localhost:3000/decks`, {
+            method: "POST",
+            body: JSON.stringify(this.state.deck),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok){
+                that.setState({saved: true});
+                console.log("We're A-Okay!");
+            }
+        })
+    }
+
+    //Updates the state of this component to store flashcard objects client side
+    addCardToDeck(eng, reb, keb){
         const deck = this.state.deck
-        deck.push(defid);
+        deck.push({english: eng, reading: reb, kanji: keb});
         this.setState({deck: deck});
     }
 
@@ -44,7 +66,7 @@ export default class CardData extends React.Component {
         }
         return(
             <div>
-                <CardsInDeck deck={this.state.deck.length} />
+                <CardsInDeck onClick={this.saveDeck} deck={this.state.deck.length} />
                 {this.props.loading ? <img src='/assets/Blocks-1s-80px.gif'/> : dataRows}
             </div>
         )
