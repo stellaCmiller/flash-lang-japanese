@@ -5,6 +5,12 @@ const DeckManager = {
         MongORM.insertDocuments('decks', arr, function(response){
             cb(response);
         })
+    },
+
+    viewDecks(cb) {
+        MongORM.findDocuments('decks', function(response){
+            cb(response);
+        })
     }
 }
 

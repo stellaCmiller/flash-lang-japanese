@@ -5,7 +5,7 @@ function LearnIndex(props){
     return(
         <div className="col-sm-12 info-box">
             <h1>Select a deck to study or create a new one to get started!</h1>
-            <button onClick={props.onClick}>Create New Deck</button>
+                <a><button onClick={props.onClick}>Create New Deck</button></a>
             <style jsx>{`
                 .info-box {
                     padding: 30px;

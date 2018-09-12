@@ -1,5 +1,6 @@
 import DataRow from './DataRow';
 import fetch from 'isomorphic-unfetch';
+import Link from 'next/link';
 
 function NoData(){
     return (
@@ -13,7 +14,9 @@ function CardsInDeck(props){
     return(
         <div>
             <p style={{display: 'inline'}}>Number of cards added to deck: <span>{props.deck}</span></p>
-            <button style={{display: 'inline', margin: '5px'}} onClick={props.onClick}>Save Deck</button>
+            <Link href="/study">
+                <a><button style={{display: 'inline', margin: '5px'}} onClick={props.onClick}>Save Deck</button></a>
+            </Link>
         </div>
     )
 }
@@ -30,6 +33,7 @@ export default class CardData extends React.Component {
     }
 
     //Sends the whole client side deck to MongoDB
+    //
     saveDeck(){
         const that = this;
         fetch(`//localhost:3000/decks`, {
@@ -49,11 +53,12 @@ export default class CardData extends React.Component {
     //Updates the state of this component to store flashcard objects client side
     addCardToDeck(eng, reb, keb){
         const deck = this.state.deck
-        deck.push({english: eng, reading: reb, kanji: keb});
+        deck.push({english: eng, reading: reb, kanji: keb, lastStudied: new Date(), SRSLevel: 1});
         this.setState({deck: deck});
     }
 
     //Returns a collection of DataRows if results were found, else returns a not found message
+    //Displays a loading spinner while searching for data
     render() {
         const rawData = this.props.data;
         let dataRows;

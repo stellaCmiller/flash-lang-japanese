@@ -1,5 +1,4 @@
 import Layout from '../page-layouts/Layout'
-import Link from 'next/link'
 
 export default () => (
   <Layout>

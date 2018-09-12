@@ -12,4 +12,12 @@ mongoRouter.post('/decks', function(req, res){
     res.send({ status: 'SUCCESS' });
 })
 
+//change to users/{user}/decks once user functionality is implemented
+mongoRouter.get('/decks', function(req, res){
+    console.log("Retrieving Your Decks...");
+    DeckManager.viewDecks(function(response){
+        res.json(response);
+    });
+})
+
 module.exports = mongoRouter;
