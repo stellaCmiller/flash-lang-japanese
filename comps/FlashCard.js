@@ -1,21 +1,29 @@
-function StudyAlert(){
-    return(
-        <p>Due for Review</p>
-    )
+import {dueForStudy} from '../helpers';
+
+function StudyAlert(props){
+    if (props.dueIn == 0){
+        return <p>Due for Review</p>
+    } else {
+        return <p>Due in {props.dueIn} hours</p>
+    }   
 }
 
 export default class FlashCard extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            study: false
+            study: false,
+            dueIn: null
         }
     }
 
     //logic that determines if a flashcard is due for study based on SRS methods
-    componentWillMount(){
-        if (this.props.SRS == 1){
-            this.setState({study: true});
+    componentDidMount(){
+        let dueIn = dueForStudy(this.props.SRS, this.props.lastStudied)
+        if (dueIn === 0){
+            this.setState({study: true})
+        } else {
+            this.setState({dueIn: dueIn})
         }
     }
 
@@ -26,7 +34,7 @@ export default class FlashCard extends React.Component {
                 <p>{this.props.english}</p>
                 <p>{this.props.reading}</p>
                 <p>{this.props.kanji}</p>
-                {this.state.study ? <StudyAlert /> : null}
+                {this.state.study ? <StudyAlert dueIn={0}/> : <StudyAlert dueIn={this.state.dueIn}/>}
                 <style jsx>{`
                     .flash-card{
                         display: inline-block;

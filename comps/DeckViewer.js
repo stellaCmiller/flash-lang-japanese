@@ -1,5 +1,21 @@
 import fetch from 'isomorphic-unfetch';
 import FlashCard from './FlashCard';
+import StudyUtility from './StudyUtility';
+
+function DeckInfo(props){
+    return(
+        <div className="deck-info">
+            <h3>Viewing "Deck" with {props.length} Cards</h3>
+            <button onClick={props.onClick}>Study Cards Due</button>
+            <style jsx>{`
+                .deck-info{
+                    margin: 10px;
+                    padding: 10px;
+                }
+            `}</style>
+        </div>
+    )
+}
 
 export default class DeckViewer extends React.Component {
     constructor(props) {
@@ -8,7 +24,7 @@ export default class DeckViewer extends React.Component {
             cards: [],
             studyMode: false
         }
-        this.loadDecks = this.loadDecks.bind(this);
+        this.loadCards = this.loadCards.bind(this);
         this.studyAll = this.studyAll.bind(this);
     }
 
@@ -18,11 +34,11 @@ export default class DeckViewer extends React.Component {
 
     //load all cards upon entry to the deck page
     componentDidMount(){
-        this.loadDecks();
+        this.loadCards();
     }
 
     //Route to be changed to /users/{userid}/decks/:deckid
-    loadDecks() {
+    loadCards() {
         const that = this;
         fetch('//localhost:3000/decks').then(function(response) {
             if (response.status >= 400) {
@@ -43,17 +59,8 @@ export default class DeckViewer extends React.Component {
         )
         return (
             <div className="container-fluid">
-                <div className="deck-holder">
-                    <h3>Viewing "Deck" with {this.state.cards.length} Cards</h3>
-                    <button>Study Cards Due</button>
-                </div>
-                {this.state.study ? <StudyUtility/> : cardCollection}
-                <style jsx>{`
-                    .deck-holder{
-                        margin: 10px;
-                        padding: 10px;
-                    }
-                `}</style>
+                {this.state.studyMode ? null : <DeckInfo onClick={this.studyAll} length={this.state.cards.length}/>}
+                {this.state.studyMode ? <StudyUtility cards={rawData}/> : cardCollection}
             </div>
         )
     }
