@@ -20,10 +20,11 @@ export default class FlashCard extends React.Component {
     //logic that determines if a flashcard is due for study based on SRS methods
     componentDidMount(){
         let dueIn = dueForStudy(this.props.SRS, this.props.lastStudied)
+        let rounded = Math.round(dueIn)
         if (dueIn === 0){
             this.setState({study: true})
         } else {
-            this.setState({dueIn: dueIn})
+            this.setState({dueIn: rounded})
         }
     }
 

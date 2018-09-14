@@ -1,9 +1,11 @@
 const config = require('../db-config/mongo-config');
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
+const ObjectID = mongodb.ObjectID;
 const mongoURL = `${config.db.host}`;
 const dbName = config.db.name;
 
+//I probably could have saved myself all this trouble by using mongoose but why do things the easy way?
 const MongORM = {
 
     insertDocuments(col, docArray, callback) {
@@ -32,6 +34,18 @@ const MongORM = {
                 callback(res);
                 client.close();
             });
+        });
+    },
+
+    //Change to multiple documents eventually
+    updateDocument(col, docID, updates, callback) {
+        MongoClient.connect(mongoURL, function(err, client){
+            if(err) throw err;
+            const db = client.db(dbName);
+            const collection = db.collection(col);
+            collection.findOneAndUpdate({_id : ObjectID(docID)},{$set : updates}).then(res => {
+                callback(res);
+            })
         });
     }
 }

@@ -1,5 +1,3 @@
-import { throws } from "assert";
-
 export default class StudyFlashCard extends React.Component {
     constructor(props){
         super(props);
@@ -16,7 +14,7 @@ export default class StudyFlashCard extends React.Component {
                         text-align: center;
                         margin-top: 10vh;
                         background-color: #eee;
-                        height: 50vh;
+                        min-height: 30vh;
                     }
 
                     h3 {
