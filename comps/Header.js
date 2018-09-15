@@ -1,21 +1,30 @@
-import Link from 'next/link'
-
-const linkStyle = {
-  marginRight: 15
-}
+import Link from 'next/link';
+import Modal from './Modal';
 
 const Header = () => (
-    <div>
-        <Link href="/signup">
-          <a style={linkStyle}>Sign Up</a>
-        </Link>
-        <Link href="/login">
-          <a style={linkStyle}>Log In</a>
-        </Link>
-        <Link href="/learn">
-          <a style={linkStyle}>Learn</a>
-        </Link>
+  <div id="home-header">
+    <div id="home-links">
+      <Modal TriggerValue="Sign Up" />
+      <Modal TriggerValue="Log In" />
+      <Link href="/learn">
+        <a>Learn</a>
+      </Link>
+      <Link href="/trial">
+        <a>Try it!</a>
+      </Link>
     </div>
+    <style jsx>{`
+          #home-header {
+            background-color: #FF5F5F;
+          }
+
+          #home-links {
+            margin-left: 10vw;
+            padding: 15px 0px 15px 0px;
+          }
+   
+        `}</style>
+  </div>
 )
 
 export default Header

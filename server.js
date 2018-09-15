@@ -1,8 +1,8 @@
 const express = require('express')
 const next = require('next')
-const router = require('./controllers/api-routing.js')
+const router = require('./routes/api-routing.js')
 const bodyParser = require('body-parser');
-const mongoRouter = require('./controllers/mongo-routes');
+const mongoRouter = require('./routes/mongo-routes');
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })

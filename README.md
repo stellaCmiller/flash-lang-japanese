@@ -3,6 +3,8 @@
 <hr />
 
 ### Random To-Dos:
+
+* Use React Fragments to clean up all of the annoying extra divs in my code
 * Make a more generic button component that receives a value prop because I swap button values a lot, no need to have multiple
 * Eventually swap over to react-bootstrap instead of using it the normal way
 * Figure out a way to only run the dueForStudy function once, instead of running it again when the "Study All" button is clicked (will probably require shufflings methods around in components)

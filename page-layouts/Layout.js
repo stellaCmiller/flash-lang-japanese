@@ -5,11 +5,11 @@ import Footer from '../comps/Footer'
 const Layout = (props) => (
   <div>
     <Head/>
+    <Header />
     <div className="container1">
-      <Header />
       {props.children}
-      <Footer />
     </div>
+    <Footer />
     <style jsx>{`
       .container1 {
         width: 80vw;

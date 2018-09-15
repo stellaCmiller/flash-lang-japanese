@@ -18,7 +18,7 @@ const AnswerForm = function (props) {
             <input type="text" onChange={props.onChange} />
             <input type="Submit" value="Enter" />
             <style jsx>{`
-                form{
+                form {
                     margin-top: 20px;
                     padding: 10px;
                 }
@@ -57,6 +57,7 @@ export default class StudyUtility extends React.Component {
 
     checkAnswer(event) {
         event.preventDefault();
+        event.target.reset();
         const currentCard = this.state.studyArray[this.state.currentIndex];
         const userInput = this.state.answer.toLowerCase();
         const answer = this.state.studyArray[this.state.currentIndex].english.toLowerCase();
@@ -73,6 +74,7 @@ export default class StudyUtility extends React.Component {
             //Continue studying with the next card
             this.setState({ currentIndex: this.state.currentIndex + 1 })
         } else {
+            //Else display finish message and redirect to main study page
             this.setState({ finished: true });
         }
     }
@@ -85,7 +87,6 @@ export default class StudyUtility extends React.Component {
             headers: { 'Content-Type': 'application/json' }
         }).then(function (res) {
             console.log(res);
-            console.log('yeet mofo');
         })
     }
 

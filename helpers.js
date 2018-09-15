@@ -4,7 +4,7 @@ export function hoursBetween(date1, date2){
     return result;
 }
 
-//Returns the number of hours until the card is due for study
+//Returns the number of hours/minutes/days until the card is due for study
 //Return of 0 means the card is due for study immediately
 export function dueForStudy(SRS, lastStudied){
     let now = new Date();

@@ -1,10 +1,11 @@
 import {dueForStudy} from '../helpers';
+import {minutesBetween} from '../helpers';
 
 function StudyAlert(props){
     if (props.dueIn == 0){
         return <p>Due for Review</p>
     } else {
-        return <p>Due in {props.dueIn} hours</p>
+        return <p>Due in {props.dueInRounded} {props.units}</p>
     }   
 }
 
@@ -13,18 +14,34 @@ export default class FlashCard extends React.Component {
         super(props);
         this.state = {
             study: false,
-            dueIn: null
+            dueIn: null,
+            dueInRounded: null,
+            units: "hours"
         }
     }
 
-    //logic that determines if a flashcard is due for study based on SRS methods
+    //logic that determines if a flashcard is due for study based and displays time until study in a reasonable format
     componentDidMount(){
-        let dueIn = dueForStudy(this.props.SRS, this.props.lastStudied)
-        let rounded = Math.round(dueIn)
+        const dueIn = dueForStudy(this.props.SRS, this.props.lastStudied);
+        let rounded = Math.round(dueIn);
+        if (dueIn > 730){
+            rounded = Math.round(rounded/24/7/4); // change to months when over 730 hours
+            this.setState({units: "months"});
+        } else if (dueIn > 168){ 
+            rounded = Math.round(rounded/24/7); //change to weeks when over 168 hours
+            this.setState({units: "weeks"});
+        } else if (dueIn > 48){ 
+            rounded = Math.round(rounded/24); //change to days when over 24 hours
+            this.setState({units: "days"});
+        } else if (dueIn < 1){ 
+            rounded = Math.round(rounded*60);
+            this.setState({units: "minutes"}); //change to minutes when under 1 hour
+        }
         if (dueIn === 0){
             this.setState({study: true})
         } else {
-            this.setState({dueIn: rounded})
+            this.setState({dueIn: dueIn})
+            this.setState({dueInRounded: rounded})
         }
     }
 
@@ -35,7 +52,7 @@ export default class FlashCard extends React.Component {
                 <p>{this.props.english}</p>
                 <p>{this.props.reading}</p>
                 <p>{this.props.kanji}</p>
-                {this.state.study ? <StudyAlert dueIn={0}/> : <StudyAlert dueIn={this.state.dueIn}/>}
+                {this.state.study ? <StudyAlert dueIn={0}/> : <StudyAlert dueInRounded={this.state.dueInRounded} dueIn={this.state.dueIn} units={this.state.units}/>}
                 <style jsx>{`
                     .flash-card{
                         display: inline-block;

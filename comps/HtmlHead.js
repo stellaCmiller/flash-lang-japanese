@@ -15,7 +15,7 @@ export default () => (
         <link rel="icon" href="../assets/flashFav.ico" type="image/x-icon" />
 
         {/*Custom Styles, primarily for media queries*/}
-        <link rel="stylesheet" href="../assets/styles/study.css" />
+        <link rel="stylesheet" href="../assets/styles/style.css" />
         
     </Head>
 )
