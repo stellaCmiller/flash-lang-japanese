@@ -1,4 +1,4 @@
-const connection = require('../db-config/mysqlConnection');
+const connection = require('../config/mysqlConnection');
 
 const QueryDict = {
     queryEnglish(word, callback){

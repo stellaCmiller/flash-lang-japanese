@@ -1,6 +1,16 @@
 const express = require('express');
 const mongoRouter = express.Router();
 const DeckManager = require('../models/DeckManager');
+const Users = require('../models/Users');
+
+mongoRouter.post('/Users', function(req, res){
+    console.log("Adding new user...");
+    const user = req.body;
+    Users.addUser(user, function(res){
+        console.log(res);
+    });
+    res.redirect('/learn');
+})
 
 //Create new deck
 //change to users/{user}/decks/:id once user functionality is implemented

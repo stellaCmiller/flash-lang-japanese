@@ -4,6 +4,9 @@
 
 ### Random To-Dos:
 
+
+* Git rid of my callback hell using async/await
+* OH MY GOD, i can get rid of most of the fetch requests, I had 0 idea that the body parser url encoded extended option made forms actually function correctly. UGH
 * Use React Fragments to clean up all of the annoying extra divs in my code
 * Make a more generic button component that receives a value prop because I swap button values a lot, no need to have multiple
 * Eventually swap over to react-bootstrap instead of using it the normal way

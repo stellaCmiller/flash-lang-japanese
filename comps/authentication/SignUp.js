@@ -1,21 +1,15 @@
 export default class SignUp extends React.Component {
     constructor(props){
         super(props);
-        this.signUp = this.signUp.bind(this);
-    }
-
-    signUp(event){
-        event.preventDefault();
-        console.log("YEAH BRUH TIME FOR FUCKING AUTHENTICATION")
     }
 
     render(){
         return(
             <div className="modal-text">
                 <h3>Get Ready to Learn!</h3>
-                <form id="signup" onSubmit={this.signup}>
-                    Please Enter a Username:<br/>
-                    <input type="text" name="username" className="form-control" /><br /><br />
+                <form id="signup" action="/Users" method="post">
+                    Please Enter your Email:<br/>
+                    <input type="text" name="email" className="form-control" /><br /><br />
                     Please Enter a Password:<br />
                     <input type="password" name="password" className="form-control"/><br /><br />
                     Confirm Password: <br />

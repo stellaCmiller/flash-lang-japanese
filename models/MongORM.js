@@ -1,4 +1,4 @@
-const config = require('../db-config/mongo-config');
+const config = require('../config/mongo-config');
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const ObjectID = mongodb.ObjectID;
@@ -9,7 +9,7 @@ const dbName = config.db.name;
 const MongORM = {
 
     insertDocuments(col, docArray, callback) {
-        MongoClient.connect(mongoURL, function(err, client) {
+        MongoClient.connect(mongoURL, { useNewUrlParser: true }, function(err, client) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
             const db = client.db(dbName);

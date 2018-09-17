@@ -3,6 +3,7 @@ const next = require('next')
 const router = require('./routes/api-routing.js')
 const bodyParser = require('body-parser');
 const mongoRouter = require('./routes/mongo-routes');
+const passport = require('passport');
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -14,18 +15,20 @@ app.prepare()
   const server = express()
 
   server.use(bodyParser.json());
+  server.use(bodyParser.urlencoded({
+    extended: true
+  }));
   server.use(router);
   server.use(mongoRouter);
   server.use(express.static('public'));
 
-  server.get('/signup', (req, res) => {
-    const queryParams = { id: req.params.id } 
-    app.render(req, res, actualPage, queryParams)
-  })
+  server.post('/login', 
+    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', failureFlash: true })
+  );
 
   server.get('*', (req, res) => {
     return handle(req, res)
-  })
+  });
 
   server.listen(3000, (err) => {
     if (err) throw err
