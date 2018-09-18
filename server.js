@@ -3,7 +3,7 @@ const next = require('next')
 const router = require('./routes/api-routing.js')
 const bodyParser = require('body-parser');
 const mongoRouter = require('./routes/mongo-routes');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
