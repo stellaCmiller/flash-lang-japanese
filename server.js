@@ -28,7 +28,7 @@ app.prepare()
 
   server.listen(port, (err) => {
     if (err) throw err
-    console.log(`> Ready on ${port}`)
+    console.log(`> Ready on ${port} ayy lmao`)
   })
 })
 .catch((ex) => {
