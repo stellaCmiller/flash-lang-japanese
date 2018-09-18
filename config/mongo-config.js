@@ -1,6 +1,7 @@
 let config = {};
 config.db = {
-    MONGO_URI: process.env.MONGODB_URI
+    MONGO_URL: process.env.MONGODB_URL,
+    DB_NAME: process.env.MONGODB_DB
 };
 
 
