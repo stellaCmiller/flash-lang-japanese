@@ -81,7 +81,7 @@ export default class StudyUtility extends React.Component {
 
     //Sends put request to update the SRS level of the current card
     updateCardStatus(card, newSRS) {
-        fetch('//localhost:3000/decks', {
+        fetch('https://flashlang-japanese.herokuapp.com/decks', {
             method: 'PUT',
             body: JSON.stringify({ 'ID': card._id, 'SRS': newSRS }),
             headers: { 'Content-Type': 'application/json' }
