@@ -3,7 +3,7 @@ const next = require('next')
 const router = require('./routes/api-routing.js')
 const bodyParser = require('body-parser');
 const mongoRouter = require('./routes/mongo-routes');
-const passport = require('passport');
+const port = process.env.PORT || 3000;
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -22,17 +22,13 @@ app.prepare()
   server.use(mongoRouter);
   server.use(express.static('public'));
 
-  server.post('/login', 
-    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', failureFlash: true })
-  );
-
   server.get('*', (req, res) => {
     return handle(req, res)
   });
 
-  server.listen(3000, (err) => {
+  server.listen(port, (err) => {
     if (err) throw err
-    console.log('> Ready on http://localhost:3000')
+    console.log(`> Ready on ${port}`)
   })
 })
 .catch((ex) => {
