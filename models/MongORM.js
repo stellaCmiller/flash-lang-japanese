@@ -8,10 +8,11 @@ const mongoURI = `${config.MONGO_URI}`;
 const MongORM = {
 
     insertDocuments(col, docArray, callback) {
-        MongoClient.connect(mongoURI, { useNewUrlParser: true }, function(err, client) {
+        console.log("attempting to connect to mongo DB");
+        console.log("the URI im using is: " +mongoURI)
+        MongoClient.connect(mongoURI, { useNewUrlParser: true }, function(err, db) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
-            const db = client.db();
             const collection = db.collection(col);
             collection.insertMany(docArray, function(err, res) {
                 if (err) throw err;
@@ -23,10 +24,9 @@ const MongORM = {
     },
         
     findDocuments(col, callback) {
-        MongoClient.connect(mongoURI, function(err, client) {
+        MongoClient.connect(mongoURI, function(err, db) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
-            const db = client.db();
             const collection = db.collection(col);
             collection.find({}).toArray(function(err, res){
                 if (err) throw err;
@@ -38,9 +38,8 @@ const MongORM = {
 
     //Change to multiple documents eventually
     updateDocument(col, docID, updates, callback) {
-        MongoClient.connect(mongoURI, function(err, client){
+        MongoClient.connect(mongoURI, function(err, db){
             if(err) throw err;
-            const db = client.db();
             const collection = db.collection(col);
             collection.findOneAndUpdate({_id : ObjectID(docID)},{$set : updates}).then(res => {
                 callback(res);
