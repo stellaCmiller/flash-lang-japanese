@@ -2,7 +2,7 @@ const config = require('../config/mongo-config');
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const ObjectID = mongodb.ObjectID;
-const mongoURI = `${config.MONGO_URI}`;
+const mongoURI = `${config.db.MONGO_URI}`;
 
 //I probably could have saved myself all this trouble by using mongoose but why do things the easy way?
 const MongORM = {
