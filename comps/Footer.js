@@ -2,8 +2,12 @@ import Link from 'next/link';
 
 const SocialButtons = () => (
     <div id="social-links">
-        <img src="../assets/GitHub-Mark-32px.png" alt="Github"/>
-        <img src="../assets/In-2CRev-34px-R.png" alt="LinkedIn"/>
+        <a href="https://github.com/stellaCmiller/flash-lang-japanese">
+            <img src="../assets/GitHub-Mark-32px.png" alt="Github"/>
+        </a>
+        <a href="https://www.linkedin.com/in/stellacmiller512/">
+            <img src="../assets/In-2CRev-34px-R.png" alt="LinkedIn"/>
+        </a>
         <style jsx>{`
             img {
                 padding: 15px;
@@ -21,7 +25,7 @@ const Footer = () => (
     <div>
         <div id="footer">
             <div id="footer-links">
-                <Link href="/dev"><a>Meet the Dev</a></Link>
+                <Link href="/about"><a>About this Project</a></Link>
                 <Link href="/bugs"><a>Bug Reporting</a></Link>
             </div>
             <SocialButtons />
@@ -41,6 +45,7 @@ const Footer = () => (
                     height: 10vh;
                     margin-top: 20px;
                     background-color: #FF5F5F;
+                    flex-shrink: 0;
                 }
             `}</style>
         </div>

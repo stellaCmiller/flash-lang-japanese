@@ -41,8 +41,10 @@ export default class DeckCreator extends React.Component {
         this.setState({loading: true});
         this.setState({empty: false});
         const that = this;
+        const dev = '//localhost:8080'
+        const prod = `https://flashlang-japanese.herokuapp.com`
         event.preventDefault();
-        fetch(`https://flashlang-japanese.herokuapp.com/api/EtoJ/${this.state.value}`).then(function (res) {
+        fetch(`${prod}/api/EtoJ/${this.state.value}`).then(function (res) {
             if (res.status >= 400) {
                 throw new Error("Something went wrong, that's all I know :(");
             }

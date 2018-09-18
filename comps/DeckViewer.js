@@ -40,7 +40,9 @@ export default class DeckViewer extends React.Component {
     //Route to be changed to /users/{userid}/decks/:deckid
     loadCards() {
         const that = this;
-        fetch('https://flashlang-japanese.herokuapp.com/decks').then(function(response) {
+        const dev = `//localhost:8080`
+        const prod = `https://flashlang-japanese.herokuapp.com`
+        fetch(`${prod}/decks`).then(function(response) {
             if (response.status >= 400) {
                 throw new Error("Something went wrong, that's all I know :(");
             }

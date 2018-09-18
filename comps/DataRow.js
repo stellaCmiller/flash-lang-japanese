@@ -41,7 +41,9 @@ export default class DataRow extends React.Component {
     expand() {
         this.setState({ expanded: true });
         const that = this;
-        fetch(`https://flashlang-japanese.herokuapp.com/api/entry/${this.props.defid}`).then(function (res) {
+        const dev = '//localhost:8080'
+        const prod = `https://flashlang-japanese.herokuapp.com`
+        fetch(`${prod}/api/entry/${this.props.defid}`).then(function (res) {
             if (res.status >= 400) {
                 throw new Error("Something went wrong, that's all I know :(");
             }

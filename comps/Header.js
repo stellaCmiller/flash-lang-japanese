@@ -4,6 +4,9 @@ import Modal from './Modal';
 const Header = () => (
   <div id="home-header">
     <div id="home-links">
+      <Link href="/">
+        <a>Home</a>
+      </Link>
       <Modal TriggerValue="Sign Up" />
       <Modal TriggerValue="Log In" />
       <Link href="/learn">

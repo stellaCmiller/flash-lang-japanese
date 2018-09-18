@@ -6,12 +6,13 @@ const mongoURL = config.db.MONGO_URL;
 const dbname = config.db.DB_NAME;
 const username = config.db.MONGO_USER;
 const password = config.db.MONGO_PASSWORD;
+const dev = config.db.MONGO_DEV;
+const productionURI = `mongodb://${username}:${password}@${mongoURL}`;
 
 //I probably could have saved myself all this trouble by using mongoose but why do things the easy way?
 const MongORM = {
-
     insertDocuments(col, docArray, callback) {
-        MongoClient.connect(`mongodb://${username}:${password}@${mongoURL}`, { useNewUrlParser: true }, function(err, client) {
+        MongoClient.connect(productionURI, { useNewUrlParser: true }, function(err, client) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
             const db = client.db(dbname);
@@ -26,7 +27,7 @@ const MongORM = {
     },
         
     findDocuments(col, callback) {
-        MongoClient.connect(`mongodb://${username}:${password}@${mongoURL}`, function(err, client) {
+        MongoClient.connect(productionURI, function(err, client) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
             const db = client.db(dbname);
@@ -41,7 +42,7 @@ const MongORM = {
 
     //Change to multiple documents eventually
     updateDocument(col, docID, updates, callback) {
-        MongoClient.connect(`mongodb://${username}:${password}@${mongoURL}`, function(err, client){
+        MongoClient.connect(productionURI, function(err, client){
             if(err) throw err;
             const db = client.db(dbname);
             const collection = db.collection(col);

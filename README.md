@@ -4,6 +4,8 @@
 
 ### Random To-Dos:
 
+* DESIGN FOR MOBILE 
+* Adjust code to make the footer sticky for all pages
 * Make my url into a variable for my client side fetch functions
 * Git rid of my callback hell using async/await
 * OH MY GOD, i can get rid of most of the fetch requests, I had 0 idea that the body parser url encoded extended option made forms actually function correctly. UGH

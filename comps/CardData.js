@@ -34,8 +34,10 @@ export default class CardData extends React.Component {
 
     //Sends the whole client side deck to MongoDB
     saveDeck(){
+        const dev = '//localhost:8080'
+        const prod = `https://flashlang-japanese.herokuapp.com`
         const that = this;
-        fetch(`https://flashlang-japanese.herokuapp.com/decks`, {
+        fetch(`${prod}/decks`, {
             method: "POST",
             body: JSON.stringify(this.state.deck),
             headers:{
