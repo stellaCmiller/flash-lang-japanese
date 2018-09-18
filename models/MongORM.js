@@ -4,14 +4,14 @@ const MongoClient = mongodb.MongoClient;
 const ObjectID = mongodb.ObjectID;
 const mongoURL = config.db.MONGO_URL;
 const dbname = config.db.DB_NAME;
+const username = config.db.MONGO_USER;
+const password = config.db.MONGO_PASSWORD;
 
 //I probably could have saved myself all this trouble by using mongoose but why do things the easy way?
 const MongORM = {
 
     insertDocuments(col, docArray, callback) {
-        console.log("attempting to connect to mongo DB");
-        console.log("the URI im using is: " + mongoURL)
-        MongoClient.connect(mongoURL, { useNewUrlParser: true }, function(err, client) {
+        MongoClient.connect(`mongodb://${username}:${password}@${mongoURL}`, { useNewUrlParser: true }, function(err, client) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
             const db = client.db(dbname);
@@ -26,7 +26,7 @@ const MongORM = {
     },
         
     findDocuments(col, callback) {
-        MongoClient.connect(mongoURL, function(err, client) {
+        MongoClient.connect(`mongodb://${username}:${password}@${mongoURL}`, function(err, client) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
             const db = client.db(dbname);
@@ -41,7 +41,7 @@ const MongORM = {
 
     //Change to multiple documents eventually
     updateDocument(col, docID, updates, callback) {
-        MongoClient.connect(mongoURL, function(err, client){
+        MongoClient.connect(`mongodb://${username}:${password}@${mongoURL}`, function(err, client){
             if(err) throw err;
             const db = client.db(dbname);
             const collection = db.collection(col);
