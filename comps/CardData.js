@@ -15,7 +15,7 @@ function CardsInDeck(props){
         <div>
             <p style={{display: 'inline'}}>Number of cards added to deck: <span>{props.deck}</span></p>
             <Link href="/study">
-                <a><button style={{display: 'inline', margin: '5px'}} onClick={props.onClick}>Save Deck</button></a>
+                <a><button style={{display: 'inline', margin: '5px'}} onClick={props.onClick}>Save Cards</button></a>
             </Link>
         </div>
     )

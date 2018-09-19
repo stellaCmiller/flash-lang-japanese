@@ -28,7 +28,7 @@ export default () => (
     <style jsx>{`
       h1 {
         font-family: 'Fugaz One', cursive;
-        font-size: 4em;
+        font-size: 12vmin; 
       }
 
       .jumbotron {

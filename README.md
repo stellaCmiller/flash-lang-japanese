@@ -4,7 +4,7 @@
 
 ### Random To-Dos:
 
-* DESIGN FOR MOBILE 
+* Design with a mobile-first approach
 * Adjust code to make the footer sticky for all pages
 * Make my url into a variable for my client side fetch functions
 * Git rid of my callback hell using async/await

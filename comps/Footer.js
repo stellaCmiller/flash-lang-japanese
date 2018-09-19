@@ -17,6 +17,16 @@ const SocialButtons = () => (
                 float: right;
                 margin-right: 10vw;
             }
+
+            @media only screen and (max-width: 640px){
+                #social-links{
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    margin: auto;
+                    background-color: #FF5F5F;
+                }
+            }
         `}</style>
     </div>
 )
@@ -42,7 +52,7 @@ const Footer = () => (
                 }
 
                 #footer {
-                    height: 10vh;
+                    min-height: 10vh;
                     margin-top: 20px;
                     background-color: #FF5F5F;
                     flex-shrink: 0;

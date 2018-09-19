@@ -14,11 +14,15 @@ const LearnLayout = (props) => (
             </div>
             <style jsx>{`
                 #sideNav {
+                    padding: 20px;
                     background-color: #FF5F5F;
                     border-right: 2px solid #eee;
-                    min-height: 100vh;
                     text-align: center;
                     font-family: 'Merriweather Sans', sans-serif;
+                }
+
+                @media only screen and (min-width: 640px){
+                    min-height: 100vh;
                 }
             `}
             </style>

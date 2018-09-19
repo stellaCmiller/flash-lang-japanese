@@ -12,9 +12,6 @@ const Header = () => (
       <Link href="/learn">
         <a>Learn</a>
       </Link>
-      <Link href="/trial">
-        <a>Try it!</a>
-      </Link>
     </div>
     <style jsx>{`
           #home-header {

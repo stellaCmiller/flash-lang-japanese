@@ -4,8 +4,8 @@ import DeckCreator from './DeckCreator'
 function LearnIndex(props){
     return(
         <div className="col-sm-12 info-box">
-            <h1>Select a deck to study or create a new one to get started!</h1>
-                <a><button onClick={props.onClick}>Create New Deck</button></a>
+            <h1>Select the Study Tab to review your cards, or add new ones here!</h1>
+                <a><button onClick={props.onClick}>Add More Cards</button></a>
             <style jsx>{`
                 .info-box {
                     padding: 30px;
@@ -19,7 +19,7 @@ function LearnIndex(props){
 function DeckWizard(props){
     return(
         <div className="col-sm-12 deck-wizard">
-            <h1>Great! Let's start by adding words.</h1>
+            <h1>Great! Let's add more words to our collection.</h1>
             <DeckCreator />
             <button id="cancel" onClick={props.onClick} className="btn btn-danger">Return to Dashboard</button>
             <style jsx>{`
