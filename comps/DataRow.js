@@ -4,13 +4,13 @@ import fetch from 'isomorphic-unfetch';
 
 function InfoButton(props) {
     return (
-        <button onClick={props.onClick}>{props.value}</button>
+        <button className="btn" style={{border: '1px solid #4C4C4C'}} onClick={props.onClick}>{props.value}</button>
     )
 }
 
 function AddCardButton(props){
     return (
-        <button onClick={props.onClick}>{props.value}</button>
+        <button className="btn" style={{border: '1px solid green'}}onClick={props.onClick}>{props.value}</button>
     )
 }
 
@@ -43,7 +43,7 @@ export default class DataRow extends React.Component {
         const that = this;
         const dev = '//localhost:8080'
         const prod = `https://flashlang-japanese.herokuapp.com`
-        fetch(`${prod}/api/entry/${this.props.defid}`).then(function (res) {
+        fetch(`${dev}/api/entry/${this.props.defid}`).then(function (res) {
             if (res.status >= 400) {
                 throw new Error("Something went wrong, that's all I know :(");
             }
@@ -66,27 +66,27 @@ export default class DataRow extends React.Component {
                     <div>
                         <div className="data-row row">
                             <div className="col-2">
+                            {
+                                    this.state.cardAdded ? (<AddCardButton value="Card Added!"/>
+                                    ) : (<AddCardButton value="Add Card" onClick={this.addCard} />)
+                                }
+                            </div>
+                            <div className="col-sm-2">
+                                <p>{this.props.gloss}</p>
+                            </div>
+                            <div className="col-sm-2">
+                                <p>{this.props.reb}</p>
+                            </div>
+                            <div className="col-sm-2">
+                                <p>{this.props.keb}</p>
+                            </div>
+                            <div className="col-sm-2">
+                                <p>{this.props.repri ? "common" : ""}</p>
+                            </div>
+                            <div className="col-sm-2">
                                 {
                                     this.state.expanded ? (<InfoButton value="Collapse" onClick={this.collapse} />
                                     ) : (<InfoButton value="Expand" onClick={this.expand} />)
-                                }
-                            </div>
-                            <div className="col-2">
-                                <p>{this.props.gloss}</p>
-                            </div>
-                            <div className="col-2">
-                                <p>{this.props.reb}</p>
-                            </div>
-                            <div className="col-2">
-                                <p>{this.props.keb}</p>
-                            </div>
-                            <div className="col-2">
-                                <p>{this.props.repri ? "common" : ""}</p>
-                            </div>
-                            <div className="col-2">
-                                {
-                                    this.state.cardAdded ? (<AddCardButton value="Card Added!"/>
-                                    ) : (<AddCardButton value="Add Card" onClick={this.addCard} />)
                                 }
                             </div>
                         </div>

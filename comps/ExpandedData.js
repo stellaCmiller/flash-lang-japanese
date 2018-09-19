@@ -9,10 +9,10 @@ export default class ExpandedData extends React.Component {
         )
         return (
             <div className="expanded-data row">
-                <div className="col-6">
+                <div className="col-sm-6">
                     <p style={{padding: '10px'}}>All Definitions for this Reading:</p>
                 </div>
-                <div className="expanded-view col-6">
+                <div className="expanded-view col-sm-6">
                     <ul>{readings}</ul>
                 </div>
                 <style jsx>{`
