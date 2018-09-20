@@ -55,7 +55,6 @@ export default class FlashCard extends React.Component {
                 {this.state.study ? <StudyAlert dueIn={0}/> : <StudyAlert dueInRounded={this.state.dueInRounded} dueIn={this.state.dueIn} units={this.state.units}/>}
                 <style jsx>{`
                     .flash-card{
-                        display: inline-block;
                         text-align: center;
                         font-size: 16pt;
                         margin: 10px 5px 10px 5px;
@@ -69,6 +68,12 @@ export default class FlashCard extends React.Component {
 
                     .flash-card:hover{
                         margin-top: 5px;
+                    }
+
+                    @media only screen and (min-width: 640px){ 
+                        .flash-card {
+                            display: inline-block;
+                        }
                     }
                 `}</style>
             </div>
