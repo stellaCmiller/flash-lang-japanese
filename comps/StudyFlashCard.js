@@ -4,12 +4,19 @@ export default class StudyFlashCard extends React.Component {
     }
 
     render(){
+        const correct = this.props.correct;
+        const incorrect = this.props.incorrect;
+        let displayCorrect = (correct ? 'box-shadow: inset 0px 0px 10px 10px green' : null);
+        let displayWrong = (incorrect ? 'box-shadow: inset 0px 0px 10px 10px red' : null);
+        console.log(displayCorrect);
         return(
             <div className="big-card col-8">
                 <h3>{this.props.reading}</h3><br />
                 <h3>{this.props.kanji}</h3>
                 <style jsx>{`
                     .big-card {
+                        ${displayCorrect};
+                        ${displayWrong};
                         padding: 10px;
                         text-align: center;
                         margin-top: 10vh;

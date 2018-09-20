@@ -1,5 +1,4 @@
 import {dueForStudy} from '../helpers';
-import {minutesBetween} from '../helpers';
 
 function StudyAlert(props){
     if (props.dueIn == 0){

@@ -37,6 +37,8 @@ export default class StudyUtility extends React.Component {
             numCards: 0,
             currentIndex: 0,
             answer: '',
+            correct: false,
+            incorrect: false,
             finished: false
         }
         this.loadStudyDeck = this.loadStudyDeck.bind(this);
@@ -61,27 +63,36 @@ export default class StudyUtility extends React.Component {
         const currentCard = this.state.studyArray[this.state.currentIndex];
         const userInput = this.state.answer.toLowerCase();
         const answer = this.state.studyArray[this.state.currentIndex].english.toLowerCase();
+        const that = this;
         let SRS = currentCard.SRSLevel
         if (userInput === answer) {
             //Increase SRS level when correct, unless it's at level 8
             SRS = (SRS < 8 ? SRS + 1 : SRS);
+            this.setState({correct : true});
         } else {
             //Decrease SRS level when wrong, unless it's at level 1
             SRS = (SRS > 1 ? SRS - 1 : SRS);
+            this.setState({incorrect: true});
         }
         this.updateCardStatus(currentCard, SRS);
-        if (this.state.numCards - 1 > this.state.currentIndex) {
-            //Continue studying with the next card
-            this.setState({ currentIndex: this.state.currentIndex + 1 })
-        } else {
-            //Else display finish message and redirect to main study page
-            this.setState({ finished: true });
-        }
+        setTimeout(function(){ 
+            that.setState({correct: false});
+            that.setState({incorrect: false});
+            if (that.state.numCards - 1 > that.state.currentIndex) {
+                //Continue studying with the next card
+                that.setState({ currentIndex: that.state.currentIndex + 1 })
+            } else {
+                //Else display finish message and redirect to main study page
+                that.setState({ finished: true });
+            }
+        }, 2000); //Waits 2 full seconds 
     }
 
     //Sends put request to update the SRS level of the current card
     updateCardStatus(card, newSRS) {
-        fetch('https://flashlang-japanese.herokuapp.com/decks', {
+        const dev="http://localhost:8080";
+        const prod="https://flashlang-japanese.herokuapp.com"
+        fetch(`${prod}/decks`, {
             method: 'PUT',
             body: JSON.stringify({ 'ID': card._id, 'SRS': newSRS }),
             headers: { 'Content-Type': 'application/json' }
@@ -110,7 +121,7 @@ export default class StudyUtility extends React.Component {
             <div className="container-fluid">
                 <div className="row justify-content-center align-items-center">
                     { // Necessary because componentDidMount renders twice; setting props to undefined breaks things
-                        (currentCard ? <StudyFlashCard kanji={currentCard.kanji} reading={currentCard.reading} english={currentCard.english} /> : null)
+                        (currentCard ? <StudyFlashCard incorrect={this.state.incorrect} correct={this.state.correct} kanji={currentCard.kanji} reading={currentCard.reading} english={currentCard.english} /> : null)
                     }
                 </div>
                 <div className="row justify-content-center">
