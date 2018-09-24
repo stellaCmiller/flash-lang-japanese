@@ -1,12 +1,31 @@
 import {ErrorText} from './SignUp';
 import fetch from 'isomorphic-unfetch';
 
+function Login() {
+    return(
+        <form id="login" onSubmit={this.login}>
+            Please Enter your Username:<br/>
+            <input type="text" name="username" onChange={this.handleChange} className="form-control" /><br /><br />
+            Please Enter your Password:<br />
+            <input type="password" name="password" onChange={this.handleChange} className="form-control"/><br /><br />
+            <input type="Submit" value="Log In" />
+            {(this.state.error ? <ErrorText text={this.state.error}/> : null)}
+        </form>
+    )
+}
+
+export function DevMessage() {
+    return (
+        <p>Sorry, the login/sign up functionality is not up and running yet, but it will be soon! Please check out the github to see how it's going. </p>
+    )
+}
 
 //Incredibly similar to sign up; Maybe I can make a super component for shared methods?
 export default class LogIn extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            dev: true,
             username: "",
             password: "",
             error: ""
@@ -27,7 +46,6 @@ export default class LogIn extends React.Component {
     login(event){
         const that = this;
         event.preventDefault();
-        console.log("YEAH BRUH TIME FOR FUCKING AUTHENTICATION");
         fetch(`http://localhost:8080/Users/login`, {
             method: 'POST',
             body: JSON.stringify(that.state),
@@ -50,14 +68,7 @@ export default class LogIn extends React.Component {
         return(
             <div className="modal-text">
                 <h3>Welcome Back!</h3>
-                <form id="login" onSubmit={this.login}>
-                    Please Enter your Username:<br/>
-                    <input type="text" name="username" onChange={this.handleChange} className="form-control" /><br /><br />
-                    Please Enter your Password:<br />
-                    <input type="password" name="password" onChange={this.handleChange} className="form-control"/><br /><br />
-                    <input type="Submit" value="Log In" />
-                    {(this.state.error ? <ErrorText text={this.state.error}/> : null)}
-                </form>
+                {(this.state.dev ? <DevMessage /> : <Login />)}
                 <style jsx>{`
                     #login {
                         padding: 10px;

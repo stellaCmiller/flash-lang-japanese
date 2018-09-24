@@ -13,7 +13,7 @@ const productionURI = `mongodb://${username}:${password}@${mongoURL}`;
 const MongORM = {
 
     insertDocuments(col, docArray, callback) {
-        MongoClient.connect(dev, { useNewUrlParser: true }, function(err, client) {
+        MongoClient.connect(productionURI, { useNewUrlParser: true }, function(err, client) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
             const db = client.db(dbname);
@@ -28,7 +28,7 @@ const MongORM = {
     },
         
     findDocuments(col, query={}, callback) {
-        MongoClient.connect(dev, { useNewUrlParser: true }, function(err, client) {
+        MongoClient.connect(productionURI, { useNewUrlParser: true }, function(err, client) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
             const db = client.db(dbname);
@@ -43,7 +43,7 @@ const MongORM = {
 
     //Change to multiple documents eventually when needed
     updateDocument(col, docID, updates, callback) {
-        MongoClient.connect(dev, { useNewUrlParser: true }, function(err, client){
+        MongoClient.connect(productionURI, { useNewUrlParser: true }, function(err, client){
             if(err) throw err;
             const db = client.db(dbname);
             const collection = db.collection(col);
