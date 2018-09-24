@@ -8,7 +8,7 @@ const DeckManager = {
     },
 
     viewDecks(cb) {
-        MongORM.findDocuments('decks', function(response){
+        MongORM.findDocuments('decks', {}, function(response){
             cb(response);
         })
     },
