@@ -27,7 +27,7 @@ const MongORM = {
         });
     },
         
-    findDocuments(col, query={}, callback) {
+    findDocuments(col, query = {}, callback) {
         MongoClient.connect(productionURI, { useNewUrlParser: true }, function(err, client) {
             if (err) throw err;
             console.log("Successfully Connected to MongoDB");
