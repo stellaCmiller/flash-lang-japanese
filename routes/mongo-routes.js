@@ -8,9 +8,9 @@ mongoRouter.post('/Users', function(req, res){
     console.log("Adding new user...");
     const user = req.body;
     Users.addUser(user).then(function(){ 
-        res.redirect('/learn'); // When validation standards are met
+        res.status(300).json({redirectURL: "/learn"}); 
     }).catch(function(err){
-        res.status(400).json({error: err.message}); // When an error occurs
+        res.status(400).json({error: err}); // When an error occurs
     })
 })
 

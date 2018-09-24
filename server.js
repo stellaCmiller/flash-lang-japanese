@@ -3,6 +3,7 @@ const next = require('next')
 const router = require('./routes/api-routing.js')
 const bodyParser = require('body-parser');
 const mongoRouter = require('./routes/mongo-routes');
+const userRouter = require('./routes/userRouter');
 const port = process.env.PORT || 8080;
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -20,6 +21,7 @@ app.prepare()
   }));
   server.use(router);
   server.use(mongoRouter);
+  server.use(userRouter);
   server.use(express.static('public'));
 
   server.get('*', (req, res) => {

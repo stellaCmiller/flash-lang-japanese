@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-unfetch';
 
 //Alerts the user to signup problems
-function ErrorText(props){
+export function ErrorText(props){
     return(
         <p style={{color: 'red'}}>{props.text}</p>
     )
@@ -11,7 +11,7 @@ export default class SignUp extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            email: "",
+            username: "",
             password: "",
             passwordConfirm: "",
             error: ""
@@ -36,12 +36,17 @@ export default class SignUp extends React.Component {
         fetch("http://localhost:8080/Users", {
             method: 'POST',
             body: JSON.stringify(that.state),
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            redirect: 'follow' //not working as expected
         }).then(function(res) { 
             if (res.status == 400){
                 res.json().then(function(err){
                     that.setState({error: err.error}); 
                 });
+            } else {
+                res.json().then(function(data){
+                    window.location = data.redirectURL;
+                }); //Maybe I should be using request instead of fetch
             }
         });
     }
@@ -51,8 +56,8 @@ export default class SignUp extends React.Component {
             <div className="modal-text">
                 <h3>Get Ready to Learn!</h3>
                 <form id="signup" onSubmit={this.signUp}>
-                    Please Enter your Email:<br/>
-                    <input type="text" name="email" onChange={this.handleChange} className="form-control" /><br /><br />
+                    Please Enter a Username:<br/>
+                    <input type="text" name="username" onChange={this.handleChange} className="form-control" /><br /><br />
                     Please Enter a Password:<br />
                     <input type="password" name="password" onChange={this.handleChange} className="form-control"/><br /><br />
                     Confirm Password: <br /> 
