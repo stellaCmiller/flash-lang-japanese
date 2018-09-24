@@ -41,7 +41,7 @@ const MongORM = {
         });
     },
 
-    //Change to multiple documents eventually
+    //Change to multiple documents eventually when needed
     updateDocument(col, docID, updates, callback) {
         MongoClient.connect(dev, { useNewUrlParser: true }, function(err, client){
             if(err) throw err;

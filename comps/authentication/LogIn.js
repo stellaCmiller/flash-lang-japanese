@@ -28,13 +28,20 @@ export default class LogIn extends React.Component {
         const that = this;
         event.preventDefault();
         console.log("YEAH BRUH TIME FOR FUCKING AUTHENTICATION");
-        fetch(`http://localhost:8080/Users/${that.state.email}`, {
-            method: 'GET',
+        fetch(`http://localhost:8080/Users/login`, {
+            method: 'POST',
+            body: JSON.stringify(that.state),
+            headers: { 'Content-Type': 'application/json' },
+            redirect: 'follow' //not working as expected
         }).then(function(res) { 
             if (res.status == 400){
-                console.log("shit fucked up")
+                res.json().then(function(err){
+                    that.setState({error: err.error}); 
+                });
             } else {
-                console.log("yeet")
+                res.json().then(function(data){
+                    window.location = data.redirectURL;
+                }); //Maybe I should be using request instead of fetch
             }
         });
     }
@@ -49,6 +56,7 @@ export default class LogIn extends React.Component {
                     Please Enter your Password:<br />
                     <input type="password" name="password" onChange={this.handleChange} className="form-control"/><br /><br />
                     <input type="Submit" value="Log In" />
+                    {(this.state.error ? <ErrorText text={this.state.error}/> : null)}
                 </form>
                 <style jsx>{`
                     #login {

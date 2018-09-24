@@ -2,13 +2,12 @@ const express = require('express');
 const userRouter = express.Router();
 const Users = require('../models/Users');
 
-userRouter.get('/Users/:email', function(req, res){
-    const userEmail = req.params.email;
-    console.log(userEmail);
-    Users.logInUser(userEmail).then(function(){ 
-        console.log("Something happened but idk what");
+userRouter.post('/Users/login', function(req, res){
+    const user = req.body;
+    Users.logInUser(user).then(function(){ 
+        res.status(300).json({redirectURL: "/learn"}); //login succeeded, redirected to learn
     }).catch(function(err){
-        console.log("An error occured, and this could be that no user exists, or you have the wrong password");
+        res.status(400).json({error: err}); //error logging in
     })
 })
 
